@@ -29,5 +29,14 @@ def chat():
 
     return Response(generate(), mimetype="text/plain")
 
+@app.route("/test-redis", methods=["GET"])
+def test_redis():
+    try:
+        r.set("ping", "pong")
+        value = r.get("ping").decode()
+        return jsonify({"status": "✅ Connected to Redis", "value": value})
+    except Exception as e:
+        return jsonify({"status": "❌ Failed to connect", "error": str(e)}), 500
+
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)
