@@ -4,6 +4,7 @@ import uuid
 import json
 
 app = Flask(__name__)
+CORS(app) 
 # r = redis.Redis(host="localhost", port=6379)  # Replace with Redis IP if needed
 r = redis.Redis(host="10.95.149.115", port=6379)
 
